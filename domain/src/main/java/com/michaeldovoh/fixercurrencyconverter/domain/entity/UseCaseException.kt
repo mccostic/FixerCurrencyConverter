@@ -1,4 +1,5 @@
 package com.michaeldovoh.fixercurrencyconverter.domain.entity
 
-class UseCaseException {
+sealed class UseCaseException(cause: Throwable) : Throwable(cause) {
+    class CurrencyException(cause: Throwable) : UseCaseException(cause)
 }
