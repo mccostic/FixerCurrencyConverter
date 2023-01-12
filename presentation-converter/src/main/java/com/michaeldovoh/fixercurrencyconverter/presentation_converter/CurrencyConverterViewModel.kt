@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCurrenciesUseCase,) : ViewModel() {
+class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCurrenciesUseCase,private val currencyConverter: CurrencyListConverter) : ViewModel() {
 
     private val _currencyListFlow =
         MutableStateFlow<UiState<CurrencyListModel>>(UiState.Loading)
@@ -26,11 +26,10 @@ class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCur
         viewModelScope.launch {
             useCase.execute(GetCurrenciesUseCase.Request)
                 .map {
-
-
+                    currencyConverter.convert(it)
                 }
                 .collect {
-
+                    _currencyListFlow.value = it
                 }
         }
     }
