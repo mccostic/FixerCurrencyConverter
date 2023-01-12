@@ -1,4 +1,4 @@
-package com.dovohmichael.fixerapp.presentation_converter
+package com.michaeldovoh.fixercurrencyconverter.presentation_converter
 
 
 data class CurrencyListModel(
