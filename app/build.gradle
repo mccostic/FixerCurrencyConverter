@@ -49,6 +49,8 @@ android {
 }
 
 dependencies {
+    implementation(project(path: ":presentation-converter"))
+    implementation(project(path: ":presentation-common"))
     implementation(project(path: ":domain"))
     implementation(project(path: ":data-remote"))
     implementation(project(path: ":data-local"))

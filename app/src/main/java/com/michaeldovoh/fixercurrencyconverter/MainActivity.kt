@@ -10,6 +10,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.michaeldovoh.fixercurrencyconverter.presentation_common.navigation.NavRoutes
 import com.michaeldovoh.fixercurrencyconverter.ui.theme.FixerCurrencyConverterTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+
                 }
             }
         }
@@ -30,14 +35,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    FixerCurrencyConverterTheme {
-        Greeting("Android")
+fun App(navController: NavHostController) {
+    NavHost(navController, startDestination = NavRoutes.Home.route) {
+        composable(route = NavRoutes.Home.route) {
+            ConverterScreen(hiltViewModel(), modifier = Modifier,navController)
+        }
     }
 }
+
+
