@@ -14,10 +14,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.michaeldovoh.fixercurrencyconverter.presentation_common.navigation.NavRoutes
 import com.michaeldovoh.fixercurrencyconverter.presentation_converter.ConverterScreen
 import com.michaeldovoh.fixercurrencyconverter.ui.theme.FixerCurrencyConverterTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-
+                    val navController = rememberNavController()
+                    App(navController = navController)
                 }
             }
         }

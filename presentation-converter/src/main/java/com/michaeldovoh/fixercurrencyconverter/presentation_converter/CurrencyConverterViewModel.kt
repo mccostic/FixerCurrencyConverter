@@ -23,6 +23,7 @@ class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCur
         loadCurrencies()
     }
     private fun loadCurrencies() {
+        Log.d("CURRECCY","CURRENCIES");
         viewModelScope.launch {
             useCase.execute(GetCurrenciesUseCase.Request)
                 .map {
