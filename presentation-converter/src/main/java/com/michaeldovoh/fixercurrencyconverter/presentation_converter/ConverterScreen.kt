@@ -27,7 +27,15 @@ fun ConverterScreen(
         viewModel.currencyListFlow.collectAsState().value.let { state ->
             CommonScreen(state = state) {
                     currencyListModel->
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ){
 
+                }
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
