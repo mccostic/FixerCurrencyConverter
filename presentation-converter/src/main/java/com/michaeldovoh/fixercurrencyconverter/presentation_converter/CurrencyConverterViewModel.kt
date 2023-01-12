@@ -33,4 +33,17 @@ class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCur
                 }
         }
     }
+
+    fun onCurrencyChanged(baseCurrencySymbol: String, baseAmount: String, it: String) {
+
+    }
+
+    fun convert(
+        baseCurrencySymbol: String,
+        targetCurrencySymbol: String,
+        toDouble: Double,
+        date: String
+    ) {
+
+    }
 }
