@@ -19,13 +19,15 @@ import com.michaeldovoh.fixercurrencyconverter.presentation_common.state.CommonS
 fun ConverterScreen(
     viewModel: CurrencyConverterViewModel,
     modifier: Modifier,
-    navController: NavController
 ) {
     var targetCurrencySymbol by rememberSaveable { mutableStateOf("GHS") }
     var baseCurrencySymbol by rememberSaveable { mutableStateOf("USD") }
     var baseAmount by rememberSaveable { mutableStateOf("1") }
+    var swapCurrency by rememberSaveable { mutableStateOf(false) }
 
-
+    var rate by rememberSaveable {
+        mutableStateOf("")
+    }
     Column(modifier = Modifier.padding(24.dp, 0.dp)) {
         Spacer(modifier = Modifier.height(40.dp))
         viewModel.currencyListFlow.collectAsState().value.let { state ->
@@ -59,7 +61,7 @@ fun ConverterScreen(
                         val temp= baseCurrencySymbol
                         baseCurrencySymbol = targetCurrencySymbol
                         targetCurrencySymbol = temp
-                        //swapCurrency = !swapCurrency
+                        swapCurrency = !swapCurrency
 
 
 
@@ -103,5 +105,53 @@ fun ConverterScreen(
             }
         }
         Spacer(modifier = Modifier.height(32.dp))
+        Row(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            CurrencyRateTextField(
+                baseCurrencySymbol,
+                modifier.weight(1.0f),
+                readOnly = false,
+                value = baseAmount,
+                enabled = true,
+                onAmountChanged = { newBaseAmount ->
+                    baseAmount = newBaseAmount
+                    // currencyViewModel.updateBase(it)
+
+                    if (newBaseAmount.isNotEmpty() && newBaseAmount.toDoubleOrNull()!=null) {
+                        viewModel.convert(
+                            baseCurrencySymbol,
+                            targetCurrencySymbol,
+                            newBaseAmount.toDouble(), date = "2023-01-09"
+                        )
+
+
+                    }
+                }
+            )
+            Spacer(modifier = Modifier
+                .height(16.dp)
+                .weight(0.1f))
+            //base currency picker
+            CurrencyRateTextField(
+                targetCurrencySymbol,
+                modifier.weight(1.0f),
+                readOnly = false,
+                value = rate,
+                /*value = data.convertedAmount,
+*/
+                enabled = false,
+
+                onAmountChanged = {
+
+                }
+            )
+
+        }
+
     }
     }
