@@ -78,7 +78,8 @@ buildscript {
         test = [
                 junit     : "junit:junit:${versions.junit}",
                 coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}",
-                mockito   : "org.mockito.kotlin:mockito-kotlin:${versions.mockito}"
+                mockito   : "org.mockito.kotlin:mockito-kotlin:${versions.mockito}",
+                mockitoInline  : "org.mockito:mockito-inline:4.0.0"
         ]
         androidTest = [
                 junit             : "androidx.test.ext:junit:${versions.espressoJunit}",
