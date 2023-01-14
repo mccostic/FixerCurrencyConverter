@@ -35,4 +35,14 @@ class CurrencyRepositoryImplTest {
         Assert.assertEquals(currencies, result)
         verify(localCurrencyDataSource).addCurrencies(remoteCurrencies )
     }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `getCurrencies from local data source when not empty`() = runTest {
+        val currencies =  listOf(Currency(iso = "USD", name = "United States Dollar"))
+        whenever(localCurrencyDataSource.getCurrencies()).thenReturn(flowOf(currencies))
+        val result = repositoryImpl.getCurrencies().first()
+        Assert.assertEquals(currencies, result)
+        verify(localCurrencyDataSource).getCurrencies()
+    }
 }
