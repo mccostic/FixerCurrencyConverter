@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 fun App(navController: NavHostController) {
     NavHost(navController, startDestination = NavRoutes.Home.route) {
         composable(route = NavRoutes.Home.route) {
-            ConverterScreen(hiltViewModel(), modifier = Modifier,navController)
+            ConverterScreen(hiltViewModel(), modifier = Modifier)
         }
     }
 }
