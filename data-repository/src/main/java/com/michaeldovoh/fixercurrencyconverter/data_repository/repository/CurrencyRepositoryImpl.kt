@@ -16,10 +16,8 @@ class CurrencyRepositoryImpl @Inject constructor(
     private val localCurrencyDataSource: LocalCurrencyDataSource
 ) : CurrencyRepository {
 
-    override fun getCurrencies(): Flow<List<Currency>> = remoteCurrencyDataSource.getCurrencies().onEach {
-        localCurrencyDataSource.addCurrencies(it)
-    }
-        /*localCurrencyDataSource.getCurrencies().onEach {
+    override fun getCurrencies(): Flow<List<Currency>> =
+        localCurrencyDataSource.getCurrencies().onEach {
 
             if (it.isEmpty()) {
 
@@ -29,5 +27,5 @@ class CurrencyRepositoryImpl @Inject constructor(
             }
 
 
-        }*/
+        }
 }

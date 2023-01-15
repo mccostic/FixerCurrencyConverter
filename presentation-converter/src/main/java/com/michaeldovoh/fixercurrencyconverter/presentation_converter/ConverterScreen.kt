@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.michaeldovoh.fixercurrencyconverter.presentation_common.state.CommonScreen
+import com.michaeldovoh.fixercurrencyconverter.presentation_common.state.UiState
 
 @Composable
 fun ConverterScreen(
@@ -27,6 +28,27 @@ fun ConverterScreen(
 
     var rate by rememberSaveable {
         mutableStateOf("")
+    }
+
+    viewModel.convertedRateFlow.collectAsState().value.let {
+        when (it) {
+            is UiState.Initial -> {
+                rate = ""
+            }
+            is UiState.Loading -> {
+                rate =""
+            }
+            is UiState.Success -> {
+                rate = if(baseAmount.isNotEmpty() && baseAmount.toDoubleOrNull()!=null)
+                    String.format("%.3f",
+                        it.data.firstOrNull()?.rate?.times(baseAmount.toDouble()) ?: 0.0
+                    )
+                else "cannot convert type"
+            }
+            is UiState.Error->{
+                rate = it.errorMessage
+            }
+        }
     }
     Column(modifier = Modifier.padding(24.dp, 0.dp)) {
         Spacer(modifier = Modifier.height(40.dp))
