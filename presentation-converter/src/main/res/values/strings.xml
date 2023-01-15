@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="compare_arrow_description">Compare</string>
+    <string name="detail_text">DETAILS</string>
 </resources>
