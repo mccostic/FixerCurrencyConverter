@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.michaeldovoh.fixercurrencyconverter.data_local.db.AppDatabase
 import com.michaeldovoh.fixercurrencyconverter.data_local.db.currency.CurrencyDao
+import com.michaeldovoh.fixercurrencyconverter.data_local.db.rate.RateDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,6 +24,9 @@ class PersistenceModule {
 
     @Provides
     fun provideCurrencyDao(appDatabase: AppDatabase): CurrencyDao = appDatabase.currencyDao()
+
+    @Provides
+    fun provideRateDao(appDatabase: AppDatabase): RateDao = appDatabase.rateDao()
 
 
 
