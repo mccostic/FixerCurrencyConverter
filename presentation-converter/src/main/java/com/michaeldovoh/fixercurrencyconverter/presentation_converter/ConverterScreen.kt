@@ -93,12 +93,10 @@ fun ConverterScreen(
 
 
                         if(baseAmount.isNotEmpty() && targetCurrencySymbol.isNotEmpty() && baseCurrencySymbol.isNotEmpty()){
-                            viewModel.convert(
-                                baseCurrencySymbol,
-                                targetCurrencySymbol,
-                                baseAmount.toDouble(),
-                                date="2023-01-09"
-                            )
+
+
+                            viewModel.onCurrencyChanged(baseCurrencySymbol=baseCurrencySymbol,
+                                targetCurrencySymbol=targetCurrencySymbol, baseAmount = baseAmount)
                         }
 
 
