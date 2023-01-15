@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.threeten.bp.LocalDate
+import org.threeten.bp.ZoneId
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,7 +53,12 @@ class CurrencyConverterViewModel @Inject constructor(
 
 
         convert(baseCurrencySymbol = baseCurrencySymbol, targetCurrencySymbol = targetCurrencySymbol, baseAmount = baseAmount.toDouble(),
-            date = "2023-01-09")
+            date = getDate())
+    }
+
+    fun getDate(): String {
+        val zoneId = ZoneId.systemDefault()
+        return LocalDate.now(zoneId).toString()
     }
 
     fun convert(baseCurrencySymbol: String, targetCurrencySymbol: String, baseAmount: Double,date:String) {
