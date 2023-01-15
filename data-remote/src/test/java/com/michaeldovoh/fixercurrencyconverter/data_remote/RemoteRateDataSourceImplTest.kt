@@ -7,7 +7,9 @@ import com.michaeldovoh.fixercurrencyconverter.data_remote.source.RemoteCurrency
 import com.michaeldovoh.fixercurrencyconverter.data_remote.source.RemoteRateDataSourceImpl
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.Currency
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.Rate
+import com.michaeldovoh.fixercurrencyconverter.domain.entity.UseCaseException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -29,5 +31,16 @@ class RemoteRateDataSourceImplTest {
         whenever(currencyService.getRate(date = "2023-01-12", base = "USD", symbols = "GHS")).thenReturn(remoteRate)
         val result = currencyDataSource.getRate(date = "2023-01-12", base = "USD", target = "GHS").first()
         Assert.assertEquals(expectedRate, result)
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun testGeRateThrowsError() = runTest {
+        whenever(currencyService.getCurrencies()).thenThrow(RuntimeException())
+        currencyDataSource.getRate(date = "2023-01-12", base = "USD", target = "GHS").catch {
+            Assert.assertTrue(it is UseCaseException.RateException)
+        }.collect{
+
+        }
     }
 }
