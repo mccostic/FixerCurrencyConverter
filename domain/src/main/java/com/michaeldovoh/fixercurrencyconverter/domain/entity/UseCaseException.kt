@@ -7,6 +7,9 @@ sealed class UseCaseException(cause: Throwable) : Throwable(cause) {
 
     class RateException(cause: Throwable) : UseCaseException(cause)
 
+    class HistoryRateException(cause: Throwable) : UseCaseException(cause)
+
+
     companion object {
 
         fun createFromThrowable(throwable: Throwable): UseCaseException {
