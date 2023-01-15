@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation(project(path: ":presentation-history"))
     implementation(project(path: ":presentation-converter"))
     implementation(project(path: ":presentation-common"))
     implementation(project(path: ":domain"))
