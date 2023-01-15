@@ -32,9 +32,9 @@ class CurrencyConverterViewModel @Inject constructor(
         MutableStateFlow<UiState<List<RateModel>>>(UiState.Initial)
     val convertedRateFlow: StateFlow<UiState<List<RateModel>>> = _convertedRateFlow
 
-        init {
-        loadCurrencies()
-    }
+//        init {
+//        loadCurrencies()
+//    }
      fun loadCurrencies() {
         viewModelScope.launch {
             useCase.execute(GetCurrenciesUseCase.Request)
@@ -44,13 +44,12 @@ class CurrencyConverterViewModel @Inject constructor(
                 .collect {
 
                     _currencyListFlow.value = it
-                    print("juyuihojijhhjnkujhjnilkjhnkj,nlk,jhmnk,jmnk,jmnkj,"+_currencyListFlow.value.javaClass)
+
                 }
         }
     }
 
     fun onCurrencyChanged(baseCurrencySymbol: String, baseAmount: String, targetCurrencySymbol: String) {
-
 
         convert(baseCurrencySymbol = baseCurrencySymbol, targetCurrencySymbol = targetCurrencySymbol, baseAmount = baseAmount.toDouble(),
             date = getDate())
@@ -65,17 +64,12 @@ class CurrencyConverterViewModel @Inject constructor(
         viewModelScope.launch {
             getRateUseCase.execute(GetRateUseCase.Request(base = baseCurrencySymbol,target=targetCurrencySymbol,date=date))
                 .map {
-                    Log.d("convert_currency", it.toString())
+                    //Log.d("convert_currency", it.toString())
                     rateConverter.convert(it)
                 }
                 .collect {
-                    if(it is UiState.Error){
-                        val its = it.errorMessage
-                        Log.d("convertERRR", its)
-                    }
 
-
-                    Log.d("convert", it.toString())
+                    ///Log.d("convert", it.toString())
                     //_convertedRateFlow.value = it
                     _convertedRateFlow.value = it
                 }

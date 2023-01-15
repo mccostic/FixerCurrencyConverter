@@ -44,11 +44,13 @@ fun ConverterScreen(
                 rate =""
             }
             is UiState.Success -> {
-                rate = if(baseAmount.isNotEmpty() && baseAmount.toDoubleOrNull()!=null)
+                val toDoubleAmount = baseAmount.toDoubleOrNull()
+                val baseRate = it.data.firstOrNull()?.rate
+                rate = if(baseAmount.isNotEmpty() && toDoubleAmount!=null && baseRate!=null)
                     String.format("%.3f",
-                        it.data.firstOrNull()?.rate?.times(baseAmount.toDouble()) ?: 0.0
+                        baseRate.times(baseAmount.toDouble())
                     )
-                else "cannot convert type"
+                else "error converting..."
             }
             is UiState.Error->{
                 rate = it.errorMessage

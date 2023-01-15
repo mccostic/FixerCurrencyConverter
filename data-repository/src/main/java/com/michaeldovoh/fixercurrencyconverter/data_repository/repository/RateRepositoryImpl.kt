@@ -25,10 +25,10 @@ class RateRepositoryImpl @Inject constructor(
         localRateDataSource.getRate(base=base,target=target,date=date).distinctUntilChanged().onEach {
 
             if (it.isEmpty()) {
-                Log.d("localRateDataSource",it.toString())
+
                 remoteRateDataSource.getRate(base = base, target = target, date = date)
                     .onEach { it2 ->
-                        Log.d("remoteRateDataSource",it2.toString())
+
                         localRateDataSource.addRate(it2)
                     }.catch { error->  Log.d("getRateError",error.toString())}.distinctUntilChanged().collect()
 

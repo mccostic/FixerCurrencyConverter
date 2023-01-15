@@ -18,7 +18,6 @@ class GetRateUseCase @Inject constructor(
         rateRepository.getRate(base = request.base, target = request.target, date = request.date)
             .map {
                 list->
-                Log.d("GetRateUseCase", list.toString())
                 Response(list)
             }
 

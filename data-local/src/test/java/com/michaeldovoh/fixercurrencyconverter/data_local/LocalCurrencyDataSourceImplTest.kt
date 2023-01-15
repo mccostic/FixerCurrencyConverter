@@ -32,9 +32,9 @@ class LocalCurrencyDataSourceImplTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testAddCurrencies() = runTest {
-        val localPosts = listOf(CurrencyEntity(iso = "USD", name = "United States Dollar"))
-        val posts = listOf(Currency(iso = "USD", name = "United States Dollar"))
-        currencyDataSource.addCurrencies(posts)
-        verify(currencyDao).insertCurrencies(localPosts)
+        val localCurrencies = listOf(CurrencyEntity(iso = "USD", name = "United States Dollar"))
+        val currencies = listOf(Currency(iso = "USD", name = "United States Dollar"))
+        currencyDataSource.addCurrencies(currencies)
+        verify(currencyDao).insertCurrencies(localCurrencies)
     }
 }

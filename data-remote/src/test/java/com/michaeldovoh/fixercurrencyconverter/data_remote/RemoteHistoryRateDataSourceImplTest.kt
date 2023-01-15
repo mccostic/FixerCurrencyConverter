@@ -9,7 +9,9 @@ import com.michaeldovoh.fixercurrencyconverter.data_remote.source.RemoteHistoryR
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.Currency
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.HistoryRate
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.Rate
+import com.michaeldovoh.fixercurrencyconverter.domain.entity.UseCaseException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -32,4 +34,14 @@ class RemoteHistoryRateDataSourceImplTest {
         Assert.assertEquals(expectedRates, result)
     }
 
+    @ExperimentalCoroutinesApi
+    @Test
+    fun testGetHistoryThrowsError() = runTest {
+        whenever(historyService.fetchHistory(start_date = "2023-01-12", end_date = "2023-01-15", base = "USD", symbols = "GHS")).thenThrow(RuntimeException())
+        historyDataSource.getHistoryRate(startDate = "2023-01-12", endDate = "2023-01-15", base = "USD", target = "GHS").catch {
+            Assert.assertTrue(it is UseCaseException.HistoryRateException)
+        }.collect{
+
+        }
+    }
 }

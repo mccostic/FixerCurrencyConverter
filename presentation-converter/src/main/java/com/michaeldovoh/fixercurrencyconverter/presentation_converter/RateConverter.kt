@@ -8,7 +8,7 @@ import com.michaeldovoh.fixercurrencyconverter.presentation_common.state.CommonR
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class RateConverter @Inject constructor(@ApplicationContext private val context: Context) :
+class RateConverter @Inject constructor() :
     CommonResultConverter<GetRateUseCase.Response, List<RateModel>>() {
 
     override fun convertSuccess(data: GetRateUseCase.Response): List<RateModel> {
