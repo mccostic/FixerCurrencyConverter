@@ -9,28 +9,31 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCurrenciesUseCase,private val currencyConverter: CurrencyListConverter) : ViewModel() {
+class CurrencyConverterViewModel @Inject constructor(private val useCase: GetCurrenciesUseCase,private val currencyConverter:
+CurrencyListConverter) : ViewModel() {
 
     private val _currencyListFlow =
         MutableStateFlow<UiState<CurrencyListModel>>(UiState.Loading)
-    val currencyListFlow: StateFlow<UiState<CurrencyListModel>> = _currencyListFlow
+    val currencyListFlow: StateFlow<UiState<CurrencyListModel>> get()= _currencyListFlow
 
-    init {
-        loadCurrencies()
-    }
-    private fun loadCurrencies() {
-        Log.d("CURRECCY","CURRENCIES");
+//    init {
+//        loadCurrencies()
+//    }
+     fun loadCurrencies() {
         viewModelScope.launch {
             useCase.execute(GetCurrenciesUseCase.Request)
                 .map {
                     currencyConverter.convert(it)
                 }
                 .collect {
+
                     _currencyListFlow.value = it
+                    print("juyuihojijhhjnkujhjnilkjhnkj,nlk,jhmnk,jmnk,jmnkj,"+_currencyListFlow.value.javaClass)
                 }
         }
     }

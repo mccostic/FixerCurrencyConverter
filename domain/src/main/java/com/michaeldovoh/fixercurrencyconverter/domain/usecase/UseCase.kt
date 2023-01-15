@@ -1,5 +1,6 @@
 package com.michaeldovoh.fixercurrencyconverter.domain.usecase
 
+import android.util.Log
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.Result
 import com.michaeldovoh.fixercurrencyconverter.domain.entity.UseCaseException
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,6 +13,7 @@ abstract class UseCase<I : UseCase.Request, O : UseCase.Response>(private val co
 
     fun execute(request: I) = process(request)
         .map {
+
             Result.Success(it) as Result<O>
         }
         .flowOn(configuration.dispatcher)

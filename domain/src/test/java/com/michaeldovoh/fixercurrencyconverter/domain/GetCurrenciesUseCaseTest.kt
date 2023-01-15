@@ -23,9 +23,9 @@ class GetCurrenciesUseCaseTest {
     @Test
     fun testProcess() = runTest {
         val request = GetCurrenciesUseCase.Request
-        val post = listOf( Currency(iso = "USD", name = "United States Dollar"))
-        whenever(currencyRepository.getCurrencies()).thenReturn(flowOf(post))
+        val currencies = listOf( Currency(iso = "USD", name = "United States Dollar"))
+        whenever(currencyRepository.getCurrencies()).thenReturn(flowOf(currencies))
         val response = useCase.process(request).first()
-        assertEquals(GetCurrenciesUseCase.Response(post), response)
+        assertEquals(GetCurrenciesUseCase.Response(currencies), response)
     }
 }
