@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.michaeldovoh.fixercurrencyconverter.presentation_common.navigation.NavRoutes
 import com.michaeldovoh.fixercurrencyconverter.presentation_converter.ConverterScreen
+import com.michaeldovoh.fixercurrencyconverter.presentation_history.HistoryScreen
 import com.michaeldovoh.fixercurrencyconverter.ui.theme.FixerCurrencyConverterTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,6 +45,13 @@ fun App(navController: NavHostController) {
     NavHost(navController, startDestination = NavRoutes.Home.route) {
         composable(route = NavRoutes.Home.route) {
             ConverterScreen(hiltViewModel(), modifier = Modifier, navController = navController)
+        }
+        composable(
+            route = NavRoutes.History.route,
+            arguments = NavRoutes.History.arguments
+        ) {
+            HistoryScreen(hiltViewModel(),modifier = Modifier,navController,NavRoutes.History.fromEntry(it))
+
         }
     }
 }
