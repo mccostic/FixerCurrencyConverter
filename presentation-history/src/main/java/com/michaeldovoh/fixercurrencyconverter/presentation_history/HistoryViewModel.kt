@@ -20,7 +20,7 @@ class HistoryViewModel @Inject constructor(private val useCase: GetHistoryRateUs
     :ViewModel(){
 
     private val _historyRatesFlow =
-        MutableStateFlow<UiState<HistoryRateListModel>>(UiState.Initial)
+        MutableStateFlow<UiState<HistoryRateListModel>>(UiState.Loading)
     val historyRatesFlow: StateFlow<UiState<HistoryRateListModel>> = _historyRatesFlow
 
     fun getDate(minusDays:Long =0): String {
@@ -40,14 +40,9 @@ class HistoryViewModel @Inject constructor(private val useCase: GetHistoryRateUs
         viewModelScope.launch {
             useCase.execute(GetHistoryRateUseCase.Request(base = base, target = target, startDate = startDate, endDate = endDate))
                 .map {
-
                     historyRateListConverter.convert(it)
                 }
                 .collect {
-                    if(it is UiState.Error){
-                        val its = it.errorMessage
-                        Log.d("HISORYRATES", its)
-                    }
                     _historyRatesFlow.value = it
                 }
         }

@@ -1,4 +1,4 @@
-package com.michaeldovoh.fixercurrencyconverter.presentation_converter
+package com.michaeldovoh.fixercurrencyconverter.presentation_history
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -6,7 +6,7 @@ import kotlinx.coroutines.test.*
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 @OptIn(ExperimentalCoroutinesApi::class)
-class MainDispatcherRule constructor(
+class DispatcherRule constructor(
     private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 ) : TestWatcher() {
     override fun starting(description: Description) {
