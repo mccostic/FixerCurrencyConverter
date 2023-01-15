@@ -27,7 +27,9 @@ class HistoryViewModel @Inject constructor(private val useCase: GetHistoryRateUs
         val zoneId = ZoneId.systemDefault()
         return LocalDate.now(zoneId).minusDays(minusDays).toString()
     }
+    fun filterOtherPopularRates(historyRateListModel:List<HistoryRateListItemModel>,target: String)=historyRateListModel.filter { history->history.target !=target }
 
+    fun filterRates(historyRateListModel:List<HistoryRateListItemModel>,target: String)= historyRateListModel.filter { history->history.target ==target }
     fun getTargetCurrencies(target:String):String{
         val popularCurrencies = mutableListOf("EUR","JPY","GBP","AUD","CAD","CHF","HKD","SGD","USD","CNY","SEK")
         val topMostPopularCurrencies = popularCurrencies.filter { s->s !=target }.toMutableList()

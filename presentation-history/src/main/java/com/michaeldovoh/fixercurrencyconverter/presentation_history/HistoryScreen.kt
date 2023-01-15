@@ -19,8 +19,6 @@ import com.michaeldovoh.fixercurrencyconverter.presentation_common.state.CommonS
 @Composable
 fun HistoryScreen(
     viewModel: HistoryViewModel,
-    modifier: Modifier,
-    navController: NavController,
     input: HistoryInput
 ) {
 
@@ -44,7 +42,7 @@ fun HistoryScreen(
                     LazyColumn(modifier = Modifier
                         .weight(1.0f)
                         .fillMaxWidth()) {
-                        items(historyRateListModel.items.filter { history->history.target ==target }) { history ->
+                        items(viewModel.filterRates(historyRateListModel.items,target)) { history ->
                             HistoryItem(
                                 history = history,
                                 onEditClick = {
@@ -60,7 +58,7 @@ fun HistoryScreen(
                         .weight(1.0f)
                         .fillMaxWidth()
                     ) {
-                        items(historyRateListModel.items.filter { history->history.target !=target }) { history ->
+                        items(viewModel.filterOtherPopularRates(historyRateListModel.items,target)) { history ->
                             HistoryItem(
                                 history = history,
                                 onEditClick = {

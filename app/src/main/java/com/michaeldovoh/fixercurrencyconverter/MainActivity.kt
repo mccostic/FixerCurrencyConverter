@@ -50,7 +50,7 @@ fun App(navController: NavHostController) {
             route = NavRoutes.History.route,
             arguments = NavRoutes.History.arguments
         ) {
-            HistoryScreen(hiltViewModel(),modifier = Modifier,navController,NavRoutes.History.fromEntry(it))
+            HistoryScreen(hiltViewModel(),NavRoutes.History.fromEntry(it))
 
         }
     }
