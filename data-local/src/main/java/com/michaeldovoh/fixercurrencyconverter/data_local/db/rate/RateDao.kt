@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface RateDao {
 
     @Query("SELECT * FROM rate where id=:id")
-    fun getRate(id:String): Flow<List<Rate>>
+    fun getRate(id:String): Flow<List<RateEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRate(currencies: RateEntity)
