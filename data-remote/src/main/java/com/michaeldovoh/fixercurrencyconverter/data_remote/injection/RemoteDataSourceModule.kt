@@ -14,4 +14,5 @@ abstract class RemoteDataSourceModule {
     @Binds
     abstract fun bindCurrencyDataSource(remoteCurrencyDataSourceImpl: RemoteCurrencyDataSourceImpl): RemoteCurrencyDataSource
 
+
 }
