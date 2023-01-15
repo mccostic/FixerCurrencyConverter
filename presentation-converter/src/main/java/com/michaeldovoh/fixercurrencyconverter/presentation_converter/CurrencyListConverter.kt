@@ -6,7 +6,7 @@ import com.michaeldovoh.fixercurrencyconverter.presentation_common.state.CommonR
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class CurrencyListConverter @Inject constructor(@ApplicationContext private val context: Context) :
+class CurrencyListConverter :
     CommonResultConverter<GetCurrenciesUseCase.Response, CurrencyListModel>() {
 
     override fun convertSuccess(data: GetCurrenciesUseCase.Response): CurrencyListModel {
