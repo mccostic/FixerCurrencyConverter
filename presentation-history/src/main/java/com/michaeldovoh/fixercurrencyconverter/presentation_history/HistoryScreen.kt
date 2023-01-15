@@ -30,4 +30,7 @@ fun HistoryScreen(
         mutableStateOf(input.targetCurrency)
     }
 
+    LaunchedEffect(key1 = base, key2 = target){
+        viewModel.getHistoryRates(target=viewModel.getTargetCurrencies(target),endDate=viewModel.getDate(),startDate=viewModel.getDate(3), base = base)
+    }
 }
