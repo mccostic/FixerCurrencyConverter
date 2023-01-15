@@ -5,6 +5,8 @@ sealed class UseCaseException(cause: Throwable) : Throwable(cause) {
 
     class UnknownException(cause: Throwable) : UseCaseException(cause)
 
+    class RateException(cause: Throwable) : UseCaseException(cause)
+
     companion object {
 
         fun createFromThrowable(throwable: Throwable): UseCaseException {
