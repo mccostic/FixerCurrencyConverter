@@ -4,6 +4,7 @@ package com.michaeldovoh.fixercurrencyconverter.data_remote.injection
 import com.michaeldovoh.fixercurrencyconverter.data_remote.networking.currency.CurrencyService
 import com.squareup.moshi.Moshi
 import com.michaeldovoh.fixercurrencyconverter.data_remote.BuildConfig
+import com.michaeldovoh.fixercurrencyconverter.data_remote.networking.history.HistoryRateService
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -69,4 +70,7 @@ class NetworkModule {
     fun provideCurrencyService(retrofit: Retrofit): CurrencyService =
         retrofit.create(CurrencyService::class.java)
 
+    @Provides
+    fun provideHistoryRateService(retrofit: Retrofit): HistoryRateService =
+        retrofit.create(HistoryRateService::class.java)
 }
