@@ -32,9 +32,11 @@ class CurrencyConverterViewModel @Inject constructor(
         MutableStateFlow<UiState<List<RateModel>>>(UiState.Initial)
     val convertedRateFlow: StateFlow<UiState<List<RateModel>>> = _convertedRateFlow
 
-    /*    init {
+    init {
         loadCurrencies()
-    }*/
+        convert(baseCurrencySymbol = "USD", targetCurrencySymbol = "GHS", baseAmount = 1.0,
+            date = getDate())
+    }
      fun loadCurrencies() {
         viewModelScope.launch {
             useCase.execute(GetCurrenciesUseCase.Request)
